@@ -1,0 +1,39 @@
+.darkSavedPage {
+  background-color: #0f0f0f;
+  height: 100%;
+}
+.savedPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.savedContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+}
+.darkSavedContainer {
+  background-color: #0f0f0f;
+}
+.noSaved{
+  width: 400px;
+}
+
+.darkNoSaveHead{
+  color: white;
+}
+.darkNoSavePara{
+  color: grey;
+}
+.noSaveTexts{
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  /* border: 2px solid red; */
+}
