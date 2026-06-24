@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 import Cookies from "js-cookie";
@@ -19,15 +19,15 @@ const DetailedVideoCard = () => {
   const [videoData, setVideoData] = useState(null);
   const { id } = useParams();
 
-  const Apiurl = `${DetailedApiUrl}${id}`;
-  const jwt = Cookies.get("jwt_token");
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  };
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    const Apiurl = `${DetailedApiUrl}${id}`;
+    const jwt = Cookies.get("jwt_token");
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    };
     try {
       // throw new Error("guje");
       const fetchedData = await fetch(Apiurl, options);
@@ -39,10 +39,10 @@ const DetailedVideoCard = () => {
       return;
     }
     setIsLoading(false);
-  };
+  }, [id]);
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div

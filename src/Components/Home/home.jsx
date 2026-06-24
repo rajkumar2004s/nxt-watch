@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import Cookies from "js-cookie";
 import { IoIosSearch } from "react-icons/io";
 import { BeatLoader } from "react-spinners";
@@ -20,8 +20,8 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [videosArray, setVideosArray] = useState([]);
 
-  const jwt = Cookies.get("jwt_token");
-  const fetchVideos = async () => {
+  const fetchVideos = useCallback(async () => {
+    const jwt = Cookies.get("jwt_token");
     const options = {
       method: "GET",
       headers: {
@@ -42,10 +42,10 @@ const Home = () => {
       return;
     }
     setIsLoading(false);
-  };
+  }, [searchQuery]);
   useEffect(() => {
     fetchVideos();
-  }, [searchQuery]);
+  }, [fetchVideos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

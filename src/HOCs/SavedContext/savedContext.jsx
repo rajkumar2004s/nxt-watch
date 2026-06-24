@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useState } from "react";
 import { useEffect } from "react";
 
@@ -12,8 +13,9 @@ const SavedVideosProvider = ({ children }) => {
   };
   const deleteVideo = (videoId) => {
     setSavedVideosArray((prev) => {
-      const { [videoId]: x, ...rest } = prev;
-      return rest
+      const copy = { ...prev };
+      delete copy[videoId];
+      return copy;
     });
   };
   useEffect(() => {

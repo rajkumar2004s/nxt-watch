@@ -11,7 +11,7 @@ const TrendingVideoView = ({ details }) => {
   const { isDark } = useContext(ThemeContext);
   const { id, channel, published_at, title, thumbnail_url, view_count } =
     details;
-  const { name, profile_image_url } = channel;
+  const { name } = channel;
 
   return (
     <div className="trendingElement" onClick={() => navigate(`/videos/${id}`)}>

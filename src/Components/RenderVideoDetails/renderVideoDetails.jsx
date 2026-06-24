@@ -10,8 +10,6 @@ const RenderDetails = (props) => {
     description,
     id,
     published_at,
-    thumbnail_url,
-    video_url,
     view_count,
     channel,
   } = props.details;

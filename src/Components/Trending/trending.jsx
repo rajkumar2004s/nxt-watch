@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import Cookies from "js-cookie";
 
 import { BeatLoader } from "react-spinners";
@@ -17,9 +17,8 @@ const Trending = () => {
   const { isDark } = useContext(ThemeContext);
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const jwt = Cookies.get("jwt_token");
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    const jwt = Cookies.get("jwt_token");
     const options = {
       method: "GET",
       headers: {
@@ -37,10 +36,10 @@ const Trending = () => {
       return;
     }
     setIsLoading(false);
-  };
+  }, []);
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const renderVideos = () => {
     return (

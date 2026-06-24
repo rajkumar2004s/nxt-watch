@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import Cookies from "js-cookie";
 
 import RenderFailure from "../FailureView/failureView";
@@ -16,15 +16,14 @@ const Gaming = () => {
   const [gamesArray, setGamesArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const jwt = Cookies.get("jwt_token");
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  };
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    const jwt = Cookies.get("jwt_token");
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    };
     try {
       // throw new Error("Testing");
       const fetchedData = await fetch(GamingApiUrl, options);
@@ -36,11 +35,11 @@ const Gaming = () => {
       return;
     }
     setIsLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const renderVideos = () => {
     return (
