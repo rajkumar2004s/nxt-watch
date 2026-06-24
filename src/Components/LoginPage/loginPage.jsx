@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-
 import { ThemeContext } from "../../HOCs/ThemeContext/themeContext";
 import { LoginApiUrl } from "../../Constants/Apis/apis";
 import { LoginProcess } from "../../Services/loginService";
@@ -12,7 +11,7 @@ import "./loginPage.css";
 import ThemeTogler from "../ThemeToggler/themeToggler.jsx";
 
 const LoginPage = () => {
-  const {  isDark } = useContext(ThemeContext);
+  const { isDark } = useContext(ThemeContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +37,9 @@ const LoginPage = () => {
 
   return (
     <div className={isDark ? "darkdisplay display" : "display"}>
-      <div className="loginMode"><ThemeTogler/></div>
+      <div className="loginMode">
+        <ThemeTogler />
+      </div>
       <form
         className={isDark ? "darkcard loginCard" : "loginCard"}
         onSubmit={handleLogin}
@@ -87,7 +88,9 @@ const LoginPage = () => {
             <label htmlFor="showPassword">Show Password</label>
           </div>
         </div>
-
+        <div>
+          <p className="credentials"> rahul, rahul@2021</p>
+        </div>
         <button type="submit" className="loginButton">
           Login
         </button>
